@@ -96,8 +96,8 @@ fun ServerListScreen(
     }
 
     var rowFilterState by remember { mutableIntStateOf(0) }
-    val titles = listOf<String>("All") + state.groups.keys.toList()
-    var selectedServerGroup = state.groups.keys.toList()
+    val titles = listOf<String>("All") + (state.groups.keys.toList().ifEmpty { emptyList() })
+    var selectedServerGroup = state.groups.keys.toList().ifEmpty { emptyList() }
         .getOrNull(rowFilterState - 1)
         ?.let { state.groups[it] }
         ?: emptyList() // 如果索引不存在，返回空列表
